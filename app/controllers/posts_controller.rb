@@ -10,6 +10,14 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @commentable = @post
+    @comments = @commentable.comments
+    @comment = Comment.new
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @post }
+    end
   end
 
   # GET /posts/new
