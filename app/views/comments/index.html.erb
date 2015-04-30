@@ -4,13 +4,18 @@
 
 <% @comments.each do |comment| %>
   <div>
+    <div>
+      <strong><%= comment.full_name %></strong> | 
+      <%= comment.email %> | 
+      <%= comment.created_at.strftime("%B %d, %Y") %>
+    </div>
     <div><%= comment.comment %></div>
-    <div><%= link_to 'Reply', new_comment_path(parent_id: comment) %></div>
-    <div><%= link_to 'Edit', edit_comment_path(comment) %></div>
-    <div><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+    <div><%= link_to 'Reply', new_comment_path(parent_id: comment) %>
+         <%= link_to 'Edit', edit_comment_path(comment) %>
+         <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
   </div>
 <% end %>
-
 
 <br>
 

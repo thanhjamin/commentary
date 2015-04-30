@@ -2,11 +2,11 @@ class Comment < ActiveRecord::Base
 	has_ancestry
 
 	validates_presence_of :comment, :email, :full_name
-	validate :email, format: { 
+	validates :email, format: { 
 		with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, 
-		on: :create
+		on: :create 
 	}
-	validate :full_name, :length {
+	validates :full_name, length: {
 		minimum: 2,
 		maximum: 10,
 		tokenizer: lambda { |str| str.scan(/\w+/) },
