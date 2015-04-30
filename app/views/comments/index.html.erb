@@ -2,17 +2,15 @@
 
 <h1>Comments</h1>
 
-<table>
-  <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <td><%= link_to comment.comment, comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @comments.each do |comment| %>
+  <div>
+    <div><%= comment.comment %></div>
+    <div><%= link_to 'Reply', new_comment_path(parent_id: comment) %></div>
+    <div><%= link_to 'Edit', edit_comment_path(comment) %></div>
+    <div><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+  </div>
+<% end %>
+
 
 <br>
 

@@ -1,6 +1,16 @@
 class Comment < ActiveRecord::Base
-	validates :comment, presence: true
-	validates :email, presence: true
-	validates :full_name, presence: true
-	
+	has_ancestry
+
+	validates_presence_of :comment, :email, :full_name
+	validate :email, format: { 
+		with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, 
+		on: :create
+	}
+	validate :full_name, :length {
+		minimum: 2,
+		maximum: 10,
+		tokenizer: lambda { |str| str.scan(/\w+/) },
+		too_short: "please enter your full name",
+		too_long: "please enter just your first and last name"
+	}
 end
