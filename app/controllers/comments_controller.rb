@@ -13,6 +13,11 @@ class CommentsController < ApplicationController
 
   def new
     @comment = @commentable.comments.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js
+    end
   end
 
   # POST /comments
