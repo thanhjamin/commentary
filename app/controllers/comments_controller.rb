@@ -1,29 +1,22 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :update, :destroy]
-  before_filter :load_commentable
 
   # GET /comments/new
   def index
-    @commentable = load_commentable
-    @comments = @commentable.comments
+    @comments = Comment.all
   end
   
   def show
   end
 
   def new
-    @comment = @commentable.comments.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.js
-    end
+    @comment = @Comment.new
   end
 
   # POST /comments
   # POST /comments.json
   def create
-    @comment = @commentable.comments.new(comment_params)
+    @comment = Comment.new(comment_params)
 
     respond_to do |format|
       if @comment.save
@@ -69,10 +62,5 @@ class CommentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:comment)
-    end
-
-    def load_commentable
-      @resource, id = request.path.split('/')[1,2]
-      @commentable = @resource.singularize.classify.constantize.find(id)
     end
 end

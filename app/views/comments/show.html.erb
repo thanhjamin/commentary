@@ -5,9 +5,5 @@
   <%= @comment.comment %>
 </p>
 
-<%= render 'comments/form' %>
-
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>
-
-<%= link_to 'New Comment', new_comment_comment_path(@comment, @post) %>
