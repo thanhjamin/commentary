@@ -2,6 +2,8 @@
 
 one:
   comment: MyText
+  email: hello@world.com
+  full_name: JohnDoe@world.com
 
 two:
   comment: MyText
