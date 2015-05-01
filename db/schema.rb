@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150430184731) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text     "comment"
     t.datetime "created_at", null: false
@@ -22,6 +25,6 @@ ActiveRecord::Schema.define(version: 20150430184731) do
     t.string   "ancestry"
   end
 
-  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry"
+  add_index "comments", ["ancestry"], name: "index_comments_on_ancestry", using: :btree
 
 end
