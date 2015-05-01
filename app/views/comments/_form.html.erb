@@ -14,17 +14,20 @@
   <%= f.hidden_field :parent_id %>
   <p class="field">
     <%= f.label :full_name %><br>
-    <%= f.text_field :full_name, placeholder: "Jon Snow", require: true %>
+    <%= f.text_field :full_name, placeholder: "Jon Snow", required: true %>
   </p>
   <p class="field">
     <%= f.label :email %><br>
-    <%= f.email_field :email, placeholder: "JonSnow@CastleBlack.com", require: true %>
+    <%= f.email_field :email, placeholder: "JonSnow@CastleBlack.com", required: true %>
   </p>
   <p>
     <%= f.label :comment, "New Comment" %><br />
-    <%= f.text_area :comment, rows: 8, placeholder: "I know nothing", require: true %>
+    <%= f.text_area :comment, rows: 8, placeholder: "I know nothing", required: true %>
   </p>
-  <p><%= f.submit "Create Comment" %></p>
+  <p><%= f.submit "Save", class: "btn" %></p>
 <% end %>
 
+<% if session[:comment_ids] && session[:comment_ids].include?(comment.id) %>
+<p>hello world</p>
+<% end %> 
 

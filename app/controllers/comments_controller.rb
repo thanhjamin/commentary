@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :update, :destroy]
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   # GET /comments/new
   def index
@@ -14,6 +15,9 @@ class CommentsController < ApplicationController
     @comment = Comment.new(parent_id: params[:parent_id])
   end
 
+  def edit
+  end
+
   # POST /comments
   # POST /comments.json
   def create
@@ -21,6 +25,8 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        session[:comment_ids] ||= []
+        session[:comment_ids] << @comment.id
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
@@ -55,6 +61,12 @@ class CommentsController < ApplicationController
   end
 
   private
+    def authorize
+      unless session[:comment_ids] && session[:comment_ids].include?(params[:id].to_i)
+        redirect_to root_url
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
