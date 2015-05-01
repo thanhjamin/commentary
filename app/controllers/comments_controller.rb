@@ -13,6 +13,8 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new(parent_id: params[:parent_id])
+    @comment.email = session[:comment_email] if session[:comment_email]
+    @comment.full_name = session[:comment_full_name] if session[:comment_full_name]
   end
 
   def edit
@@ -27,6 +29,8 @@ class CommentsController < ApplicationController
       if @comment.save
         session[:comment_ids] ||= []
         session[:comment_ids] << @comment.id
+        session[:comment_email] = @comment.email
+        session[:comment_full_name] = @comment.full_name
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else

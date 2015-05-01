@@ -14,11 +14,11 @@
   <%= f.hidden_field :parent_id %>
   <p class="field">
     <%= f.label :full_name %><br>
-    <%= f.text_field :full_name, placeholder: "Jon Snow", required: true %>
+    <%= f.text_field :full_name, placeholder: "Jon Snow", value: "#{@comment.full_name}", required: true %>
   </p>
   <p class="field">
     <%= f.label :email %><br>
-    <%= f.email_field :email, placeholder: "JonSnow@CastleBlack.com", required: true %>
+    <%= f.email_field :email, placeholder: "JonSnow@CastleBlack.com", value: "#{@comment.email}", required: true %>
   </p>
   <p>
     <%= f.label :comment, "New Comment" %><br />
